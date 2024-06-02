@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <style>
+            div {
+                height: 300px;
+                width: 300px;
+                background-color: green;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="one">1</div>
+        <div id="two">2</div>
+        <div id="three">3</div>
+
+
+             <script>
+            function paintRed(event) {
+            event.target.style.backgroundColor = 'red';
+            event.target.removeEventListener('click', paintRed);
+            event.target.addEventListener('click', paintGreen);
+        }
+
+        function paintGreen(event) {
+            event.target.style.backgroundColor = 'green';
+            event.target.removeEventListener('click', paintGreen);
+            event.target.addEventListener('click', paintRed);
+        }
+
+        const divs = document.querySelectorAll('div');
+        divs.forEach(div => {
+            div.addEventListener('click', paintRed);
+        });
+    </script>
+        </script>
+    </body>
+</html>

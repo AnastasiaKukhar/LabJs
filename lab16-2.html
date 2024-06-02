@@ -1,0 +1,65 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <a href="http:/pinterest.com" >pinterest</a>
+        <a href="http:/canva.com">Canva</a>
+        <a href="http:/google.com">google</a>
+
+
+
+
+        <input type="checkbox">
+        <input type="radio">
+        <input type="text">
+        <p id="demo"></p>
+
+
+        <p class="number">34</p>
+        <p class="number">5</p>
+        <p class="number">100</p>
+
+        <script>
+            // Код для посилань
+            const links = document.querySelectorAll('a');
+            
+            function add(event) {
+                this.originalText = this.textContent;
+                this.textContent += ` (${this.getAttribute('href')})`;
+                this.setAttribute('title', this.originalText);
+            }
+            
+            function remove(event) {
+                this.textContent = this.originalText;
+            }
+            
+            links.forEach(link => {
+                link.addEventListener('mouseenter', add);
+                link.addEventListener('mouseleave', remove);
+            });
+    
+            // Код для input
+            const inputs = document.querySelectorAll('input');
+    
+            inputs.forEach(input => {
+                input.addEventListener('click', function() {
+                    alert(this.value);
+                }, { once: true });
+            });
+    
+            // Код для параграфів з числами
+            const numberParagraphs = document.querySelectorAll('p.number');
+    
+            numberParagraphs.forEach(paragraph => {
+                paragraph.addEventListener('click', function() {
+                    const number = parseFloat(this.textContent);
+                    if (!isNaN(number)) {
+                        const square = number * number;
+                        this.textContent = square;
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

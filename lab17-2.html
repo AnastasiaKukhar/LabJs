@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+</head>
+<body>
+    <script>
+        function Game() {
+            const randomNumber = Math.floor(Math.random() * 101); 
+            const previousGuesses = new Set();
+            let attempts = 0;
+
+            while (true) {
+                const userGuess = parseInt(prompt(`Вгадайте число від 0 до 100.`));
+                attempts++;
+                
+                if (isNaN(userGuess) || userGuess < 0 || userGuess > 100) {
+                    alert("Неккоректне число");
+                    continue;
+                }
+
+                if (userGuess === randomNumber) {
+                    const now = new Date();
+                    const date = now.toLocaleDateString('uk-UA');
+                    const time = now.toLocaleTimeString('uk-UA');
+                    console.log(`${date}, ${time} - Спроба ${attempts}: ${userGuess} - Вгадали!`);
+                    alert(`Вітаємо! Ви вгадали число ${randomNumber} за ${attempts} спроб!`);
+                    const playAgain = confirm("Бажаєте спробувати ще раз?");
+                    if (playAgain) {
+                        Game(); // Рекурсивний виклик для початку гри знову
+                    }
+                    break;
+                } else {
+                    const now = new Date();
+                    const date = now.toLocaleDateString('uk-UA');
+                    const time = now.toLocaleTimeString('uk-UA');
+                    console.log(`${date}, ${time} - Спроба ${attempts}: ${userGuess} - Не вірно`);
+                    const difference = Math.abs(randomNumber - userGuess);
+                    let message = "";
+
+                    if (difference <= 10) {
+                        message += "Дуже гаряче!";
+                    } else if (difference <= 20) {
+                        message += "Гаряче";
+                    } else if (difference <= 30) {
+                        message += "Тепло";
+                    } else if (difference <= 50) {
+                        message += "Холодно";
+                    } else {
+                        message += "Дуже холодно";
+                    }
+
+                    alert(message);
+                }
+            }
+        }
+
+        Game();
+    </script>
+</body>
+</html>
